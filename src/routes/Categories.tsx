@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { getCategories } from "../store/features/categoriesSlice";
+import SearchBar from "../components/SearchBar";
 
 const Categories = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +20,9 @@ const Categories = () => {
     dispatch(getCategories());
   }, []);
   return (
-    <div className="mt-5">categoriesdfjsldkfjlksdjfklsjdflksdlkfjslkds</div>
+    <div className="mt-5">
+      <SearchBar />
+    </div>
   );
 };
 
