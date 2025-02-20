@@ -18,7 +18,9 @@ const Categories = () => {
   useEffect(() => {
     dispatch(getCategories());
   }, []);
-  return <div>categories</div>;
+  return (
+    <div className="mt-5">categoriesdfjsldkfjlksdjfklsjdflksdlkfjslkds</div>
+  );
 };
 
 export default Categories;
