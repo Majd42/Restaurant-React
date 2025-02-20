@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router";
-import Categories from "./routes/categories";
+
 import ItemsListing from "./routes/ItemsListing";
+import Categories from "./routes/Categories";
 
 function App() {
   return (
