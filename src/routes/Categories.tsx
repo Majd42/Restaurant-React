@@ -3,20 +3,12 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { getCategories } from "../store/features/categoriesSlice";
 import SearchBar from "../components/SearchBar";
 import AppButton from "../components/AppButton";
+import CategoryListingItem from "../components/CategoryListingItem";
+import CategoryListing from "../components/CategoryListing";
 
 const Categories = () => {
   const dispatch = useAppDispatch();
-  const useSelector = useAppSelector;
 
-  const categories = useSelector((state) => state.categories.categories);
-  const loadingCategories = useSelector(
-    (state) => state.categories.loadingCategories
-  );
-  const errorCategories = useSelector(
-    (state) => state.categories.errorCategories
-  );
-
-  console.log(categories, loadingCategories, errorCategories);
   useEffect(() => {
     dispatch(getCategories());
   }, []);
@@ -29,6 +21,7 @@ const Categories = () => {
           Side Courses
         </AppButton>
       </div> */}
+      <CategoryListing />
     </div>
   );
 };
