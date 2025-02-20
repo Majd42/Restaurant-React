@@ -23,7 +23,9 @@ const categoriesSlice = createSlice({
       (state.loadingCategories = true), (state.errorCategories = false);
     });
     builder.addCase(getCategories.fulfilled, (state, action) => {
-      console.log(action.payload);
+      (state.categories = action.payload.data.categories),
+        (state.loadingCategories = false),
+        (state.errorCategories = false);
     });
     builder.addCase(getCategories.rejected, (state, action) => {
       state.categories = [];

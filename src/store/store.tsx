@@ -1,12 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import categoriesReducer from "./features/categoriesSlice";
 
-const rootReducer = combineReducers({
-  categories: categoriesReducer,
-});
+// const rootReducer = combineReducers({
+//   categories: categoriesReducer,
+// });
 
 export const store = configureStore({
-  reducer: { rootReducer },
+  reducer: { categories: categoriesReducer },
 });
 
 export type AppStore = typeof store;
