@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router";
 
 import ItemsListing from "./routes/ItemsListing";
