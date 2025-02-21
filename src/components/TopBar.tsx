@@ -7,7 +7,10 @@ const TopBar = () => {
       <button className="border-2 border-primary rounded-lg px-2 py-1 flex flex-row justify-center items-center gap-1 text-primary ">
         <BiArrowBack /> Back
       </button>
-      <h1 className="text-xl text-primary font-bold"> In Room Dinning</h1>
+      <h1 className="hidden sm:block text-lg text-primary font-bold">
+        {" "}
+        In Room Dinning
+      </h1>
       <CartBadge />
     </div>
   );

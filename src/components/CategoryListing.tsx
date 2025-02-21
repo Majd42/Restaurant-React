@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { Category } from "../types";
+import { useAppSelector } from "../hooks/reduxHooks";
 import CategoryListingItem from "./CategoryListingItem";
+import LoadingSpinner from "./LoadingSpinner";
 
 const CategoryListing = () => {
   const useSelector = useAppSelector;
@@ -13,16 +13,18 @@ const CategoryListing = () => {
     (state) => state.categories.errorCategories
   );
 
-  console.log(categories, loadingCategories, errorCategories);
-  if (categories.length <= 0) {
+  if (loadingCategories) {
+    return <LoadingSpinner />;
+  }
+  if (categories.length <= 0 || errorCategories) {
     return (
-      <div className="bg-gray-500 flex justify-center items-center ">
+      <div className="text-gray-500 flex justify-center items-center ">
         No Results Found
       </div>
     );
   }
   return (
-    <div className="grid grid-cols-2 gap-2 place-items-center  mt-5 ">
+    <div className="grid grid-cols-1  gap-8 place-items-center mx-3  mt-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
       {categories.map((category) => (
         <CategoryListingItem category={category} />
       ))}
