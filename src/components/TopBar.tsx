@@ -12,7 +12,7 @@ const TopBar = () => {
       >
         <BiArrowBack /> Back
       </button>
-      <h1 className="hidden sm:block text-lg text-primary font-bold">
+      <h1 className=" text-lg text-center text-primary font-bold">
         {" "}
         In Room Dinning
       </h1>
