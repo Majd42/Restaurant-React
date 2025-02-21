@@ -1,16 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CategoriesStateTypes } from "../../types";
-import { getCategoriesRequest } from "../../requests/categories";
+import { CategoriesStateTypes, getCategoryItemsProps } from "../../types";
+import {
+  getCategoriesRequest,
+  getCategoryItemsRequest,
+} from "../../requests/categories";
 
 export const getCategories = createAsyncThunk(
-  "/categories",
+  "/categories/getCategory",
   getCategoriesRequest
+);
+
+export const getCategoryItems = createAsyncThunk(
+  "/categories/getItems",
+  (props: getCategoryItemsProps) => getCategoryItemsRequest(props)
 );
 
 const initialState: CategoriesStateTypes = {
   categories: [],
   loadingCategories: false,
   errorCategories: false,
+  categoryItems: [],
+  loadingCategoryItems: false,
+  errorCategoryItems: false,
 };
 
 const categoriesSlice = createSlice({
@@ -31,6 +42,17 @@ const categoriesSlice = createSlice({
       state.categories = [];
       (state.loadingCategories = false), (state.errorCategories = true);
     });
+    builder.addCase(getCategoryItems.pending, (state) => {
+      (state.loadingCategoryItems = true),
+        (state.errorCategoryItems = false),
+        (state.categoryItems = []);
+    });
+    builder.addCase(getCategoryItems.fulfilled, (state, action) => {
+      (state.loadingCategoryItems = false),
+        (state.errorCategoryItems = false),
+        (state.categoryItems = action.payload.data.items.data);
+    });
+    builder.addCase(getCategoryItems.rejected, (state, action) => {});
   },
 });
 

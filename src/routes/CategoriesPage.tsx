@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { getCategories } from "../store/features/categoriesSlice";
 
-const Categories = () => {
+const CategoriesPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default CategoriesPage;
