@@ -16,7 +16,7 @@ const ItemsListingPage = () => {
   return (
     <div className="mt-5">
       <SearchBar />
-      <div className="mx-2 flex justify-center items-center w-full  mt-5 gap-2  ">
+      <div className="mx-2 flex justify-center items-center   mt-5 gap-2  ">
         <div className=" max-w-[900px] w-[90%] flex flex-row gap-2 ">
           <AppButton onClick={() => console.log("ksjdf")}>
             Main Courses
