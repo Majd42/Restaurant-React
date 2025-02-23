@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { CategoryItem } from "../types";
-import AppButton from "./AppButton";
+import { FaPlusSquare } from "react-icons/fa";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { addToCart } from "../store/features/cartSlice";
 
 type PropTypes = {
   isOpen: boolean;
@@ -9,6 +11,7 @@ type PropTypes = {
 };
 
 const AppModal = ({ isOpen, setIsOpen, selectedItem }: PropTypes) => {
+  const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(1);
   const [selectedExtras, setSelectedExtras] = useState<{
     [key: string]: string;
@@ -28,7 +31,23 @@ const AppModal = ({ isOpen, setIsOpen, selectedItem }: PropTypes) => {
 
   if (!isOpen) return null;
 
-  console.log("Selected Extras:", selectedExtras);
+  const handleAddToCart = () => {
+    // Check if all required extras are selected
+    const missingExtras = selectedItem.extrasWithOptions
+      .filter((extra) => extra.is_required) // Get only required extras
+      .some((extra) => !selectedExtras[extra.name]); // Check if any required extra is missing
+
+    if (missingExtras) {
+      alert("Please select all required extras before adding to cart.");
+      return;
+    }
+
+    // Proceed to add item to cart if validation passes
+    dispatch(
+      addToCart({ categoryItem: selectedItem, quantity, selectedExtras })
+    );
+    setIsOpen(false);
+  };
 
   const handleExtraChange = (extraName: string, optionName: string) => {
     setSelectedExtras((prev) => ({
@@ -91,7 +110,10 @@ const AppModal = ({ isOpen, setIsOpen, selectedItem }: PropTypes) => {
                 </div>
                 <div className="p-3">
                   {extraOption.option.map((selection) => (
-                    <div className="flex flex-row justify-between px-2 py-4">
+                    <div
+                      key={selection.id}
+                      className="flex flex-row justify-between px-2 py-4"
+                    >
                       <label
                         key={selection.name}
                         className="flex items-center space-x-2"
@@ -116,7 +138,18 @@ const AppModal = ({ isOpen, setIsOpen, selectedItem }: PropTypes) => {
             ))}
         </div>
         <div className="p-4">
-          <AppButton onClick={() => console.log("hi")}>Add To Cart</AppButton>
+          <button
+            onClick={handleAddToCart}
+            className="py-3 px-6 w-full bg-primary text-white font-bold text-lg rounded-xl flex justify-between items-center "
+          >
+            <div className="flex items-center gap-2">
+              <FaPlusSquare />
+              <p>Add to Cart</p>
+            </div>
+            <div>
+              <p>AED {(quantity * selectedItem.price).toFixed(2)}</p>
+            </div>
+          </button>
         </div>
       </div>
     </div>

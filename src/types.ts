@@ -7,6 +7,20 @@ export type CategoriesStateTypes = {
   errorCategoryItems: boolean;
 };
 
+export type cartStateTypes = {
+  cartItems: CartItem[];
+  totalPrice: number;
+};
+
+export type CartItem = {
+  id: number;
+  image: string;
+  display_name: string;
+  price: number;
+  selectedOptions: any;
+  quantity: number;
+};
+
 export type Category = {
   id: number;
   name: string;
